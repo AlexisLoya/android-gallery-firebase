@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "312825300128",
+    "project_id": "gallery-5dbd5",
+    "storage_bucket": "gallery-5dbd5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:312825300128:android:811d3b1df296b3871bf5c5",
+        "android_client_info": {
+          "package_name": "com.utez.edu.mx.activitysix"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "312825300128-5i8drl9alolkg76148uombe0to6eohpe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKDTqOFz9W2dMU-EGez5EgisIfghl5nEc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "312825300128-5i8drl9alolkg76148uombe0to6eohpe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

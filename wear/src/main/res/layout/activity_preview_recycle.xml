@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:boxedEdges="all">
+
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@android:color/transparent" />
+
+        <TextView
+            android:id="@+id/title_note"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tool:text="title"
+            android:layout_toRightOf="@+id/img"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="5dp"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+</layout>

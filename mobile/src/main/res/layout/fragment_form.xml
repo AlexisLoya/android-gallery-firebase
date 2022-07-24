@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FormFragment"
+    android:padding="@dimen/common_padding_default"
+    android:orientation="vertical"
+    >
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_margin="@dimen/common_padding_default"
+        android:id="@+id/titleName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint_name"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/common_padding_default"
+        android:hint="@string/hind_imagen"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType=""/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+</LinearLayout>

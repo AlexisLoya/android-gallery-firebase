@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">activitySix</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
+    <string name="title_activity_main_note">MainActivityNote</string>
+    <string name="title_activity_main_note_details">MainActivityNoteDetails</string>
+    <string name="title_activity_main_global_options">MainActivityGlobalOptions</string>
+    <string name="title_activity_main_chistes_details">MainActivityChistesDetails</string>
+    <string name="title_activity_main_cuentos_details">MainActivityCuentosDetails</string>
+    <string name="title_activity_main_item_details">MainActivityItemDetails</string>
+    <string name="title_activity_main_items">MainActivityItems</string>
+</resources>
