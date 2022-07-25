@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
+    android:background="@color/icons"
     android:padding="@dimen/common_padding_default"
     >
 
@@ -12,6 +13,7 @@
        android:layout_width="match_parent"
        android:layout_height="match_parent"
        android:orientation="vertical"
+
        >
       <TextView
           android:id="@+id/text"
@@ -21,6 +23,7 @@
           android:layout_margin="15dp"
           android:textStyle="bold"
           android:textSize="25sp"
+          android:textColor="@color/white"
           android:layout_marginTop="5dp"
           android:layout_marginBottom="5dp"
           android:text="Mis Coleccciones" />
@@ -34,8 +37,9 @@
              android:layout_width="25dp"
              android:layout_height="25dp"
              android:background="@drawable/ic_baseline_add_box_24"
-             android:onClick="addCollection" />
+             />
          <TextView
+             android:textColor="@color/white"
              android:layout_width="wrap_content"
              android:layout_height="match_parent"
              android:text="Agregar colección"/>

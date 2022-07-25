@@ -12,6 +12,8 @@
         <entry key="..\:/Users/CA3/3D Objects/androidapps/activitySix/wear/src/main/res/layout/activity_preview_recycle.xml" value="0.5930851063829787" />
         <entry key="mobile/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="mobile/src/main/res/layout/activity_main_form_collection.xml" value="0.25" />
+        <entry key="mobile/src/main/res/layout/fragment_form.xml" value="0.35625" />
+        <entry key="wear/src/main/res/layout/activity_main.xml" value="0.7599118942731278" />
       </map>
     </option>
   </component>

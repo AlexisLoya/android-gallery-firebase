@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:background="@color/icons"
         >
 
     <TextView
@@ -16,6 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
+        android:textColor="@color/white"
         android:layout_margin="15dp"
         android:textStyle="bold"
         android:textSize="25sp"
@@ -37,7 +39,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/imagen_btn"
+        android:id="@+id/selectBtn"
         android:layout_margin="@dimen/common_padding_default"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -47,14 +49,19 @@
             android:id="@+id/view_image"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            />
         <Button
-        android:id="@+id/submit_btn"
+            android:id="@+id/submit_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/common_padding_default"
             android:layout_marginTop="@dimen/common_padding_default"
-        android:layout_margin="@dimen/common_padding_default"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Guardar"
-        />
+            android:text="Guardar"
+            android:onClick="addCollection"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
