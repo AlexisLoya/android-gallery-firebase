@@ -43,8 +43,9 @@
         android:layout_margin="@dimen/common_padding_default"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Seleccionar imagen"
+        android:text="@string/selecc_image"
         />
+
         <ImageView
             android:id="@+id/view_image"
             android:layout_width="match_parent"
@@ -61,7 +62,7 @@
             android:layout_margin="@dimen/common_padding_default"
             android:layout_marginTop="@dimen/common_padding_default"
             android:text="Guardar"
-            android:onClick="addCollection"/>
+           />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

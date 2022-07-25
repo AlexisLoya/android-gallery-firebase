@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import com.utez.edu.mx.activitysix.*
 import com.utez.edu.mx.activitysix.databinding.ActivityPreviewRecycleBinding
 
@@ -23,6 +24,11 @@ class MenuAdapter (private val listNote: MutableList<Menu>,private val context: 
     override fun onBindViewHolder(holder: MenuAdapter.Holder, position: Int) {
         val menu:Menu = listNote[position]
         holder.binding.titleNote.text =  menu.title
+        Picasso.get()
+            .load(menu.img)
+            .resize(50, 50)
+            .centerCrop()
+            .into( holder.binding.img)
         holder.binding.root.setOnClickListener {
             Log.w("click", "en: ${menu.img}")
             context.apply {

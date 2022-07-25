@@ -46,6 +46,7 @@ class MainActivityItems : Activity() {
                     binding.items.isCircularScrollingGestureEnabled = true
                     binding.items.adapter = adapter
                     binding.text.text = title
+
                     }
                 }.addOnFailureListener { e ->
                     Log.d("TAG", "get failed with ", e)

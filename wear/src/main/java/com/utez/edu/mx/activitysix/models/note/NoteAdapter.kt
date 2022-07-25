@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import com.utez.edu.mx.activitysix.*
 import com.utez.edu.mx.activitysix.databinding.ActivityPreviewRecycleBinding
 
@@ -22,6 +23,11 @@ class NoteAdapter(private val listNote: MutableList<Note>, private val context: 
     override fun onBindViewHolder(holder: NoteAdapter.Holder, position: Int) {
         val note = listNote[position]
         holder.binding.titleNote.text =  note.title
+        Picasso.get()
+            .load(note.img)
+            .resize(50, 50)
+            .centerCrop()
+            .into( holder.binding.img)
         holder.binding.root.setOnClickListener {
             //Log.w("click", "en: ${note.title}")
             context.apply {
