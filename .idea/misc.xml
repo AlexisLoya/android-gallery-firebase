@@ -19,8 +19,10 @@
         <entry key="mobile/src/main/res/layout/collection_adapter.xml" value="0.25" />
         <entry key="mobile/src/main/res/layout/fragment_form.xml" value="0.35625" />
         <entry key="wear/src/main/res/layout/activity_main.xml" value="0.7304347826086957" />
+        <entry key="wear/src/main/res/layout/activity_main_chistes_details.xml" value="0.40585774058577406" />
         <entry key="wear/src/main/res/layout/activity_main_item_details.xml" value="0.3127615062761506" />
         <entry key="wear/src/main/res/layout/activity_main_items.xml" value="0.3127615062761506" />
+        <entry key="wear/src/main/res/layout/activity_main_note.xml" value="0.7687224669603524" />
         <entry key="wear/src/main/res/layout/activity_main_note_details.xml" value="0.40585774058577406" />
         <entry key="wear/src/main/res/layout/activity_preview_recycle.xml" value="0.6494845360824743" />
       </map>
