@@ -1,5 +1,6 @@
 package com.utez.edu.mx.activitysix
 
+import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -24,18 +25,25 @@ class MainActivity : AppCompatActivity() {
     }
     private lateinit var binding: ActivityMainBinding
 
-    private lateinit var db: FirebaseFirestore
     lateinit var adapter: MenuAdapter
 
+    override fun onResume() {
+        super.onResume()
+        fillAdapter()
+
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
+
         val view = binding.root
         setContentView(view)
 
-        // Variables
-        db = Firebase.firestore
-        val listOption = ArrayList<Menu>()
+        // Fill adapter
+        fillAdapter()
+
+
+
 
         // Add Collection
         binding.addCollection.setOnClickListener {
@@ -43,63 +51,43 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
 
         }
-        // Refresh data
+        // Refresh Adapter
         binding.refresh.setOnClickListener{
-            val docRef = db.collection(OPTIONS)
-            var refreshData= ArrayList<Menu>()
-            docRef.get()
-                .addOnSuccessListener { documents ->
-                    if (documents != null) {
-                        for (doc in documents){
-                            refreshData.add(
-                                Menu(
-                                    doc.id, doc.data["title"].toString(),
-                                    doc.data["description"].toString(),
-                                    doc.data["collection"].toString(),
-                                ))
-                        }
-
-
-                    } else {
-                        Log.d(TAG, "No such document")
-                    }
-                }
-                .addOnFailureListener { exception ->
-                    Log.d(TAG, "get failed with ", exception)
-                }
-            adapter = MenuAdapter(refreshData, this@MainActivity)
-            binding.recycleView.layoutManager = LinearLayoutManager(this@MainActivity)
-            binding.recycleView.adapter = adapter
+            fillAdapter()
         }
-        // Fill adapter
-        val docRef = db.collection(OPTIONS)
-        var refreshData:ArrayList<Menu> = arrayListOf()
-        docRef.get()
-            .addOnSuccessListener { documents ->
-                if (documents != null) {
-                    for (doc in documents){
-                        refreshData.add(
-                            Menu(
-                                doc.id, doc.data["title"].toString(),
-                                doc.data["description"].toString(),
-                                doc.data["collection"].toString(),
-                            ))
-                    }
 
-
-                } else {
-                    Log.d(TAG, "No such document")
-                }
-            }
-            .addOnFailureListener { exception ->
-                Log.d(TAG, "get failed with ", exception)
-            }
-        Log.d(TAG, "Trae")
-        adapter = MenuAdapter(refreshData, this)
-        binding.recycleView.layoutManager = LinearLayoutManager(this@MainActivity)
-        binding.recycleView.adapter = adapter
 
     }
 
-
+private fun fillAdapter(){
+    // Firebase
+    var mProcessDialog = ProgressDialog(this)
+    mProcessDialog.setMessage("Cargando...")
+    mProcessDialog.show()
+    val db = Firebase.firestore
+    val listOption = ArrayList<Menu>()
+    val docRef = db.collection("options")
+    docRef.get()
+        .addOnSuccessListener { documents ->
+            if (documents != null) {
+                for (doc in documents){
+                    listOption.add(
+                        Menu(
+                            doc.id, doc.data["title"].toString(),
+                            doc.data["description"].toString(),
+                            doc.data["collection"].toString(),
+                        ))
+                }
+                adapter = MenuAdapter(listOption, this)
+                binding.recycleView.layoutManager = LinearLayoutManager(this@MainActivity)
+                binding.recycleView.adapter = adapter
+                mProcessDialog.dismiss()
+            } else {
+                Log.d(TAG, "No such document")
+            }
+        }
+        .addOnFailureListener { exception ->
+            Log.d(TAG, "get failed with ", exception)
+        }
+    }
 }

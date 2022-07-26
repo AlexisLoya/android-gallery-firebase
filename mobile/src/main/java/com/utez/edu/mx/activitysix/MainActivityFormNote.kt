@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.TextView
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.squareup.picasso.Picasso
 import com.utez.edu.mx.activitysix.databinding.ActivityMainFormNoteBinding
 
 class MainActivityFormNote : AppCompatActivity() {
@@ -26,8 +27,14 @@ class MainActivityFormNote : AppCompatActivity() {
         val bundle = intent.extras
         val collection = bundle?.getString(MainActivity.COLLECTION)
         val image = bundle?.getString(MainActivity.IMAGE)
-
-        binding.textSubTitle.text = title
+        // Fill data
+        binding.textSubTitle.text = collection
+        Picasso.get()
+            .load(image)
+            .resize(50, 50)
+            .centerCrop()
+            .into(binding.image)
+        // Save Note
         submitBtn.setOnClickListener {
             val db = Firebase.firestore
             // Save OBJECT

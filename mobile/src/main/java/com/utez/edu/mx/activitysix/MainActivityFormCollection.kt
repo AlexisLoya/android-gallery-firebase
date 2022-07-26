@@ -29,6 +29,7 @@ class MainActivityFormCollection : AppCompatActivity() {
     }
     private lateinit var binding: ActivityMainFormCollectionBinding
     private lateinit var imageUrl: Uri
+    private var isNotEmpty = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,35 +47,16 @@ class MainActivityFormCollection : AppCompatActivity() {
         selectBtn.setOnClickListener { requestPermission() }
         // Save Image
         submitBtn.setOnClickListener {
-
-            FirebaseStoreManager().uploadImage(this,imageUrl,nameText.text.toString())
-            // Move
-            val intent = Intent(this, MainActivity::class.java).apply {
-                // Reload data
-                val db = Firebase.firestore
-                val listOption = ArrayList<Menu>()
-                val docRef = db.collection(MainActivity.OPTIONS)
-                docRef.get()
-                    .addOnSuccessListener { documents ->
-                        if (documents != null) {
-                            for (doc in documents){
-                                listOption.add(
-                                    Menu(
-                                        doc.id, doc.data["title"].toString(),
-                                        doc.data["description"].toString(),
-                                        doc.data["collection"].toString(),
-                                    ))
-                            }
-                            putExtra(MainActivity.OPTIONS, listOption)
-                        } else {
-                            Log.d(MainActivity.TAG, "No such document")
-                        }
-                    }
-                    .addOnFailureListener { exception ->
-                        Log.d(MainActivity.TAG, "get failed with ", exception)
-                    }
+            if(isNotEmpty && nameText.text.toString().isNotEmpty() && !nameText.text.toString().equals(MainActivity.OPTIONS)){
+                FirebaseStoreManager().uploadImage(this,imageUrl,nameText.text.toString())
+                // Move
+                val intent = Intent(this, MainActivity::class.java).apply {}
+                startActivity(intent)
+            }else{
+                val toast = Toast.makeText(this, "Es necesario llenar todos los campos", Toast.LENGTH_LONG)
+                toast.show()
             }
-            startActivity(intent)
+
         }
 
     }
@@ -114,6 +96,7 @@ class MainActivityFormCollection : AppCompatActivity() {
         if (result.resultCode == Activity.RESULT_OK){
             val data = result.data?.data
             imageUrl = data!!
+            isNotEmpty = true
             binding.viewImage.setImageURI(data)
         }
     }
