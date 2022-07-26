@@ -51,7 +51,4 @@ class MainActivity : Activity() {
                 Log.d(MainActivity.TAG, "get failed with ", exception)
             }
     }
-    class GlobalOption(val title:String) {
-
-    }
 }

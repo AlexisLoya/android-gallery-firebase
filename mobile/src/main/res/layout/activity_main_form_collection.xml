@@ -45,11 +45,13 @@
         android:layout_height="wrap_content"
         android:text="@string/selecc_image"
         />
-
         <ImageView
             android:id="@+id/view_image"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_width="350dp"
+            android:layout_height="350dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:adjustViewBounds="true" />
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"

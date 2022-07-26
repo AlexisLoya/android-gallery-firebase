@@ -9,27 +9,26 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.webkit.WebView.HitTestResult.IMAGE_TYPE
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
-import com.google.firebase.ktx.Firebase
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.ktx.Firebase
+import com.utez.edu.mx.activitysix.adapter.Menu
+import com.utez.edu.mx.activitysix.adapter.MenuAdapter
 import com.utez.edu.mx.activitysix.databinding.ActivityMainFormCollectionBinding
-import java.util.*
 
 class MainActivityFormCollection : AppCompatActivity() {
     companion object{
         const val  TAG = "firebase"
 
+
     }
     private lateinit var binding: ActivityMainFormCollectionBinding
     private lateinit var imageUrl: Uri
-    private val mStorageReference = FirebaseStorage.getInstance().reference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,38 +36,47 @@ class MainActivityFormCollection : AppCompatActivity() {
         binding = ActivityMainFormCollectionBinding.inflate(layoutInflater)
         setContentView(binding.root)
         // Layout elements
-        var title:String = ""
         val nameText:TextView = binding.editName
         val submitBtn:Button = binding.submitBtn
         val selectBtn:Button = binding.selectBtn
-        val db = Firebase.firestore
 
         // InputText
         nameText.setOnClickListener{title = nameText.text.toString().lowercase().trim().replace(" ","")}
         // From gallery
         selectBtn.setOnClickListener { requestPermission() }
+        // Save Image
         submitBtn.setOnClickListener {
-            // Save Image
-            val url = FirebaseStoreManager().uploadImage(this,imageUrl)
-                // Save OBJECT
-                val collection = hashMapOf(
-                    "collection" to nameText.text.toString().lowercase(),
-                    "title" to nameText.text.toString(),
-                    "description" to url
-                )
-                db.collection("options")
-                    .add(collection)
-                    .addOnSuccessListener { documentReference ->
-                        Log.d(TAG,"DocumentSnapshot added with ID: ${documentReference.id}")
-                        db.collection(nameText.text.toString().lowercase()).add(collection).addOnSuccessListener {
-                            Log.d(TAG,"DocumentSnapshot added with ID: ${it}")
+
+            FirebaseStoreManager().uploadImage(this,imageUrl,nameText.text.toString())
+            // Move
+            val intent = Intent(this, MainActivity::class.java).apply {
+                // Reload data
+                val db = Firebase.firestore
+                val listOption = ArrayList<Menu>()
+                val docRef = db.collection(MainActivity.OPTIONS)
+                docRef.get()
+                    .addOnSuccessListener { documents ->
+                        if (documents != null) {
+                            for (doc in documents){
+                                listOption.add(
+                                    Menu(
+                                        doc.id, doc.data["title"].toString(),
+                                        doc.data["description"].toString(),
+                                        doc.data["collection"].toString(),
+                                    ))
+                            }
+                            putExtra(MainActivity.OPTIONS, listOption)
+                        } else {
+                            Log.d(MainActivity.TAG, "No such document")
                         }
                     }
-                    .addOnFailureListener { e ->
-                        Log.w(TAG, "Error adding document", e)
+                    .addOnFailureListener { exception ->
+                        Log.d(MainActivity.TAG, "get failed with ", exception)
                     }
-
+            }
+            startActivity(intent)
         }
+
     }
     private fun requestPermission(){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
